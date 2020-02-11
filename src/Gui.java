@@ -2,17 +2,18 @@ import javax.swing.JFrame;
 import java.util.Arrays;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
+
+import org.omg.CORBA.DynamicImplementation;
+import org.w3c.dom.css.Counter;
+
 import javax.swing.JComboBox;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Window;
+
 import java.awt.event.ActionListener;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,20 @@ public class Gui {
 	
 	public Block blocksTools = new Block(); 
 	public Block blockData = new Block(); 
-	
+	public Integer[][] block1= new Integer[5][5]; 
+	public Integer[][] block2= new Integer[5][5]; 
+	public Integer[][] block3= new Integer[5][5]; 
+	public Integer[][] block4= new Integer[5][5]; 
+	public Integer[][] block5 = new Integer[5][5];
+	public Integer counter1 =1;
+	public Integer counter2 =1; 
+	public Integer counter3 =1; 
+	public Integer counter4 =1;
+
+	public JButton[][] boardGridValue = new JButton[20][20];
+	public BlockData getBlockData = new BlockData(); 
+	public Board theBoard = new Board(); 
+	private int counter = 1;
 		public Gui()
 		
 		{
@@ -68,28 +82,12 @@ public class Gui {
 		boardPanel.setLayout(gridLayout);
 		
 		boardPanel.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-		
-		
+		boardGridValue = theBoard.boardGrid(boardPanel); 
 		
 		//GRID 
 		
-		JButton[][] grid= new JButton[20][20];
-		for (int i =0; i<(20); i++){
-			for(int j =0; j<20; j++) {
-				
-				grid[i][j] = new JButton(); 
-				// final JButton square = new JButton();
-				 grid[i][j].setBackground(Color.white);
-				
-				    grid[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				    boardPanel.add(grid[i][j]);
-			}
-		   
-		}
-		
-		
 		//Players Button 
-		JButton playerOneButton = new JButton("Player One"); 
+		JButton playerOneButton = new JButton("Place"); 
 		playerOneButton.setPreferredSize(new Dimension(350,30));
 		JButton playerTwoButton = new JButton("Player Two"); 
 		playerTwoButton.setPreferredSize(new Dimension(350,30));
@@ -100,26 +98,22 @@ public class Gui {
 
 		// Blocks Button
 		JButton mirrorP1 = new JButton("FLIP");
-		JButton rotateLP1 = new JButton("ROTATE LEFT");
-		JButton rotateRP1 = new JButton("ROTATE RIGHT");
+		JButton rotateLP1 = new JButton("ROTATE");
 		BasicArrowButton nextP1 = new BasicArrowButton(BasicArrowButton.EAST);
 		BasicArrowButton prevP1 = new BasicArrowButton(BasicArrowButton.WEST);
 		
 		JButton mirrorP2 = new JButton("FLIP");
-		JButton rotateLP2 = new JButton("ROTATE LEFT");
-		JButton rotateRP2 = new JButton("ROTATE RIGHT");
+		JButton rotateLP2 = new JButton("ROTATE");
 		BasicArrowButton nextP2 = new BasicArrowButton(BasicArrowButton.EAST);
 		BasicArrowButton prevP2 = new BasicArrowButton(BasicArrowButton.WEST);
 		
 		JButton mirrorP3 = new JButton("FLIP");
-		JButton rotateLP3 = new JButton("ROTATE LEFT");
-		JButton rotateRP3 = new JButton("ROTATE RIGHT");
+		JButton rotateLP3 = new JButton("ROTATE");
 		BasicArrowButton nextP3 = new BasicArrowButton(BasicArrowButton.EAST);
 		BasicArrowButton prevP3 = new BasicArrowButton(BasicArrowButton.WEST);
 		
 		JButton mirrorP4 = new JButton("FLIP");
-		JButton rotateLP4 = new JButton("ROTATE LEFT");
-		JButton rotateRP4 = new JButton("ROTATE RIGHT");
+		JButton rotateLP4 = new JButton("ROTATE");
 		BasicArrowButton nextP4 = new BasicArrowButton(BasicArrowButton.EAST);
 		BasicArrowButton prevP4 = new BasicArrowButton(BasicArrowButton.WEST);
 		
@@ -147,49 +141,60 @@ public class Gui {
 		playerThreeHolder.setLayout(panelLayoutThree);
 		playerFourHolder.setLayout(panelLayoutFour);
 		JPanel playerOneBlockHolder = new JPanel();
+		JPanel playerTwoBlockHolder = new JPanel();
+		JPanel playerThreeBlockHolder = new JPanel();
+		JPanel playerFourBlockHolder = new JPanel();
 		playerOneHolder.add(playerOneBlockHolder, BorderLayout.CENTER);
-		CardLayout cardLayout = new CardLayout();
-		playerOneBlockHolder.setLayout(cardLayout);
+		playerTwoHolder.add(playerTwoBlockHolder, BorderLayout.CENTER);
+		playerThreeHolder.add(playerThreeBlockHolder, BorderLayout.CENTER);
+		playerFourHolder.add(playerFourBlockHolder, BorderLayout.CENTER);
 		
-		JPanel panel1 = new JPanel();
-		JPanel panel2 = new JPanel();
-		JPanel panel3 = new JPanel();
-		JPanel panel4 = new JPanel();
-		JPanel panel5 = new JPanel();
-		
-		playerOneBlockHolder.add(panel1); 
-		playerOneBlockHolder.add(panel2);
-		playerOneBlockHolder.add(panel3); 
-		playerOneBlockHolder.add(panel4);
-		playerOneBlockHolder.add(panel5);
-		
-		BlockData getBlockData = new BlockData(); 
-		Integer[][] block1= new Integer[5][5]; 
+		///BLOCKS//
+		Block controlBlock = new Block(); 
 	
-		//BLOCK TEST INITIALIZER
 		
-		//block1 
 		
-	
-		block1 = getBlockData.Piece(1);
-	
-		getBlockData.paintBlocksButtons(
-				block1, Color.blue,
-				panel1);
 		
 		
 	
+		//BLOCK HOLDER FOR PLAYER 1
 		
-		nextP1.addActionListener(new ActionListener() {
-								@Override 
-								public void actionPerformed(ActionEvent e) {
-								cardLayout.next(playerOneBlockHolder);}});
-		prevP1.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e) {
-			cardLayout.previous(playerOneBlockHolder);}});
+		block1 = controlBlock.addBlockTools(block1, counter1, rotateLP1,mirrorP1, nextP1, prevP1, playerOneBlockHolder, Color.BLUE);
+		block2 = controlBlock.addBlockTools(block2, counter2, rotateLP2,mirrorP2, nextP2, prevP2, playerTwoBlockHolder, Color.red);
+		block3 = controlBlock.addBlockTools(block3, counter3, rotateLP3,mirrorP3, nextP3, prevP3, playerThreeBlockHolder, Color.yellow);
+		block4 = controlBlock.addBlockTools(block4, counter4, rotateLP4,mirrorP4, nextP4, prevP4, playerFourBlockHolder, Color.green);
+	
+	block5 = getBlockData.Piece(7);
+	block5 = blocksTools.rotate(block5);
+	
+		playerOneButton.addActionListener(new ActionListener() { 	
+			
+			@Override
+			public void actionPerformed(ActionEvent e ) {
+			
+				theBoard.gridValue(boardGridValue, 2, 2, block1);
+				
+			}
+			
+		});
+		 
+	/*	for(int i=0; i<20; i++)
+		{
+			for(int j=0; j<20; j++)
+			{
+				final row = i;
+				final col = j;
+				boardGridValue[i][j].addActionListener(new ActionListener() { 	
+					@Override
+					public void actionPerformed(ActionEvent e ) {
+						theBoard.gridValue(boardGridValue, i, j, block1);
+					}
+			
+				});
+				
+		}}*/
 		
-
+		theBoard.gridValue(boardGridValue, 0, 5, block2);
 
 		//BLOCKS HOLDER
 		playerOnePanel.setPreferredSize(new Dimension(1000,400));
@@ -207,11 +212,8 @@ public class Gui {
 		playerFourPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
 		playerFourPanel.add(playerFourHolder);
 		
-		
-		
 		blokusFrame.add(playerOneTwoPanel,frameLayout.WEST);
 		blokusFrame.add(playerThreeFourPanel,frameLayout.EAST);
-		
 		
 		playerOnePanel.add(playerOneButton); 
 		playerTwoPanel.add(playerTwoButton); 
@@ -224,15 +226,8 @@ public class Gui {
 		
 		Integer save_value[] = new Integer[21]; 
        
-
-
-
-//blocksTools.paintBlocksButtons(block[0], blocksPainted)
-///////////////////////////////////////////////////////////////////////////////////////	
-		
 		
 		playerOnePanel.add(mirrorP1);
-		playerOnePanel.add(rotateRP1);
 		playerOnePanel.add(rotateLP1);
 		playerOnePanel.add(playerOneHolder);
 		playerOneHolder.setPreferredSize(new Dimension(350,250));
@@ -242,7 +237,6 @@ public class Gui {
 		
 		
 		playerTwoPanel.add(mirrorP2);
-		playerTwoPanel.add(rotateRP2);
 		playerTwoPanel.add(rotateLP2);
 		playerTwoPanel.add(playerTwoHolder);
 		playerTwoHolder.setPreferredSize(new Dimension(350,250));
@@ -251,7 +245,6 @@ public class Gui {
 		playerTwoHolder.add(prevP2, BorderLayout.WEST);
 
 		playerThreePanel.add(mirrorP3);
-		playerThreePanel.add(rotateRP3);
 		playerThreePanel.add(rotateLP3);
 		playerThreePanel.add(playerThreeHolder);
 		playerThreeHolder.setPreferredSize(new Dimension(350,250));
@@ -260,7 +253,6 @@ public class Gui {
 		playerThreeHolder.add(prevP3, BorderLayout.WEST);
 		
 		playerFourPanel.add(mirrorP4);
-		playerFourPanel.add(rotateRP4);
 		playerFourPanel.add(rotateLP4);
 		playerFourPanel.add(playerFourHolder);
 		playerFourHolder.setPreferredSize(new Dimension(350,250));
