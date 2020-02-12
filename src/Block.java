@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class Block {
 	
@@ -14,106 +18,68 @@ public class Block {
 public void update() {} 
 
 private int[][] valueOfBlock; 
-private Integer[][] block1; 
+public Integer[][] block1; 
 private Integer[][] block2; 
 private Integer[][] block3; 
 private Integer[][] block4; 
-private Integer[][] currentBlock; 
-private int counter = 1 ;
-public int currentCounter ;
-public BlockData getBlockData = new BlockData(); 
+public Integer[][] currentBlock; 
+//private int currentCounter=1; 
+public int counter; 
+private BlockData  getBlockData= new BlockData(); 
 
 
 
 	public void render(Graphics g) {}
     
-	public Integer[][] addBlockTools(Integer[][] blockID, int counterID,  JButton rotateLP1, JButton flipBlock, JButton nextP1, JButton prevP1, JPanel blockHolderP1, Color color)
+	public Integer[][] getPiece(Integer[][] blockID, int counterID, JPanel blockHolderP1, Color color)
 	{ 
-		block1 = getBlockData.Piece(counter); 
-		currentBlock = block1; 
-		currentCounter = counter++; 
-		//BLOCK HOLDER FOR PLAYER 1
+		
+
+	    	
+		blockHolderP1.removeAll(); 
+		blockHolderP1.revalidate(); 
+		blockHolderP1.repaint();
+		blockID = getBlockData.Piece(counterID);
+					
+		getBlockData.paintBlocksButtons(blockID, color,
+										blockHolderP1); 
+					
+		   
+		  return blockID;
+		   
+	}
+	
+	public Integer[][] getRotatedPiece(Integer[][] blockID, JPanel blockHolderP1, Color color)
+	{
+		blockHolderP1.removeAll(); 
+		blockHolderP1.revalidate(); 
+		blockHolderP1.repaint(); 
+		
+		blockID = rotate(blockID);
+		
+
 		getBlockData.paintBlocksButtons(
-				block1, color,
+				blockID,color,
 				blockHolderP1);
 		
-			
-		/*rotateLP1.addActionListener(new ActionListener() { 	
-			
-			@Override
-			public void actionPerformed(ActionEvent e ) {
-				
-				blockHolderP1.removeAll(); 
-				blockHolderP1.revalidate(); 
-				blockHolderP1.repaint(); 
-				
-				block1 = rotate(block1); 
-				
-				getBlockData.paintBlocksButtons(
-						block1, color,
-						blockHolderP1);
-				currentBlock = block1;
-			}
-			
-		});
-		flipBlock.addActionListener(new ActionListener() { 	
-			@Override
-			public void actionPerformed(ActionEvent e ) {
-				
-				blockHolderP1.removeAll(); 
-				blockHolderP1.revalidate(); 
-				blockHolderP1.repaint(); 
-				
-				block1 = flipHorizontal(block1); 
-				currentBlock = block1;
-				getBlockData.paintBlocksButtons(
-						block1, color,
-						blockHolderP1);
-				
-			}
-			
-		});*/
-		nextP1.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e) {
-				blockHolderP1.removeAll(); 
-				blockHolderP1.revalidate(); 
-				blockHolderP1.repaint(); 
-				block1 = getBlockData.Piece(counter); 
-				currentBlock = block1;
-				getBlockData.paintBlocksButtons(
-						block1, color,
-						blockHolderP1);
-				
-				
-				counter++;
-				currentCounter = counter++; 
-				if(counter>21) {
-					counter=1;
-				}
-				
-			}});
-		   prevP1.addActionListener(new ActionListener() {
-			@Override 
-			public void actionPerformed(ActionEvent e) {
-				blockHolderP1.removeAll(); 
-				blockHolderP1.revalidate(); 
-				blockHolderP1.repaint(); 
-				block1 = getBlockData.Piece(counter);
-				currentBlock = block1; 
-				getBlockData.paintBlocksButtons(
-						block1, Color.blue,
-						blockHolderP1);
-				 
-				
-				counter--;
-				currentCounter = counter--; 
-				if(counter<1) {
-					counter=21;
-				}}});
-		   
-		   return getBlockData.Piece(currentCounter);
-		   
+
+		return blockID; 
+	}
+	public Integer[][] getFlippedPiece(Integer[][] blockID, JPanel blockHolderP1, Color color)
+	{
+		blockHolderP1.removeAll(); 
+		blockHolderP1.revalidate(); 
+		blockHolderP1.repaint(); 
+		
+		blockID = flipHorizontal(blockID);
+		
+
+		getBlockData.paintBlocksButtons(
+				blockID,color,
+				blockHolderP1);
+		
+
+		return blockID; 
 	}
 	
 	public Integer[][] flipHorizontal(Integer[][] matrix) {
@@ -163,6 +129,8 @@ public BlockData getBlockData = new BlockData();
 			}
 });
 	}
+	
+
 	public void place() {
 		
 	}
