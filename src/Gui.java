@@ -43,10 +43,11 @@ public class Gui {
 	 
 	
     public Integer[][] blockTestIntegers = new Integer[20][20]; 
-	
+    public Integer[][] blockTestIntegers2 = new Integer[20][20]; 
 	public int currentCounter = 1; 
 	public int currentCounter2 = 1; 
 	public JButton[][] boardGridValue = new JButton[20][20];
+	public JButton[][] boardGridValue2 = new JButton[20][20];
 	public BlockData getBlockData = new BlockData(); 
 	public Board theBoard = new Board(); 
 	private int counter = 1;
@@ -96,13 +97,13 @@ public class Gui {
 		//GRID 
 		
 		//Players Button 
-		JButton playerOneButton = new JButton("Place"); 
+		JButton playerOneButton = new JButton("Choose Piece"); 
 		playerOneButton.setPreferredSize(new Dimension(350,30));
-		JButton playerTwoButton = new JButton("Player Two"); 
+		JButton playerTwoButton = new JButton("Choose Piece"); 
 		playerTwoButton.setPreferredSize(new Dimension(350,30));
-		JButton playerThreeButton = new JButton("Player Three"); 
+		JButton playerThreeButton = new JButton("Choose Piece"); 
 		playerThreeButton.setPreferredSize(new Dimension(350,30));
-		JButton playerFourButton = new JButton("Player Four");
+		JButton playerFourButton = new JButton("Choose Piece");
 		playerFourButton.setPreferredSize(new Dimension(350,30));
 
 		// Blocks Button
@@ -173,74 +174,200 @@ public class Gui {
 		block3 = controlBlock.addBlockTools(block3, counter3, rotateLP3,mirrorP3, nextP3, prevP3, playerThreeBlockHolder, Color.yellow);
 		block4 = controlBlock.addBlockTools(block4, counter4, rotateLP4,mirrorP4, nextP4, prevP4, playerFourBlockHolder, Color.green);*/
 		JLabel testJLabel = new JLabel(); 
-		boardGridValue = theBoard.boardGrid(boardPanel); 
+		boardGridValue = theBoard.boardGrid(boardPanel,blockTestIntegers); 
 		
-		nextP1.addActionListener(new ActionListener() { 
-			@Override
-			public void actionPerformed(ActionEvent e ) {
-			if(e.getSource()==nextP1) {
-			  block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
-
-				counter1++; 
-				if(counter1>21) {
-					counter1=1;
-				}}
-			  } 
-		});
-		  rotateLP1.addActionListener(new ActionListener() { 	
-				
-				@Override
-				public void actionPerformed(ActionEvent e ) {		
-					if(e.getSource()==rotateLP1) {
-					block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
-					
-				}}	
-			});
-			mirrorP1.addActionListener(new ActionListener() { 	
-				
-				@Override
-				public void actionPerformed(ActionEvent e ) {
-					
-					if(e.getSource()==mirrorP1) {
-						block1 = blocksTools.getFlippedPiece(block1,  playerOneBlockHolder, Color.blue);			
-					}
-				}	
-			});
+		  JButton nextTurnP1 = new JButton ("NEXT");
+		    JButton nextTurnP2 = new JButton ("NEXT");
+		    JButton nextTurnP3 = new JButton ("NEXT");
+		    JButton nextTurnP4 = new JButton ("NEXT");
+		    JButton startBlokus = new JButton ("Start"); 
+		    JButton passP1 = new JButton ("PASS");
+		    JButton passP2 = new JButton ("PASS");
+		    JButton passP3 = new JButton ("PASS");
+		    JButton passP4 = new JButton ("PASS");
+		    
+		    playerOnePanel.add(nextTurnP2);
+		    playerOnePanel.add(passP2);
+		    playerTwoPanel.add(nextTurnP3);
+		    playerTwoPanel.add(passP3);
+		    playerThreePanel.add(nextTurnP4);
+		    playerThreePanel.add(passP4);
+		    playerFourPanel.add(nextTurnP1);
+		    playerFourPanel.add(passP1);
 		 
-	
-			nextP2.addActionListener(new ActionListener() { 
-				@Override
-				public void actionPerformed(ActionEvent e ) {
-				if(e.getSource()==nextP2) {
-				  block2 = blocksTools.getPiece(block2, counter2, playerTwoBlockHolder, Color.RED);
-
-					counter2++; 
-					if(counter2>21) {
-						counter2=1;
-					}}
-				  } 
-			});
-			  rotateLP2.addActionListener(new ActionListener() { 	
-					
-					@Override
-					public void actionPerformed(ActionEvent e ) {		
-						if(e.getSource()==rotateLP2) {
-						block2 = blocksTools.getRotatedPiece(block2,  playerTwoBlockHolder, Color.red);
-						
-					}}	
-				});
-				mirrorP2.addActionListener(new ActionListener() { 	
-					
+		    menuBarJPanel.add(startBlokus); 
+		     
+		     
+		     startBlokus.addActionListener(new ActionListener() {  
+				    @Override
+				    public void actionPerformed(ActionEvent e ) {    
+				    	passP2.setEnabled(true);
+					     rotateLP1.setEnabled(true);
+					     mirrorP1.setEnabled(true);
+					     playerOneBlockHolder.setEnabled(true);
+		     nextTurnP3.setEnabled(false);
+		     passP3.setEnabled(false);
+		     rotateLP2.setEnabled(false);
+		     mirrorP2.setEnabled(false);
+		     playerTwoBlockHolder.setEnabled(false);
+		     nextTurnP4.setEnabled(false);
+		     passP4.setEnabled(false);
+		     rotateLP3.setEnabled(false);
+		     mirrorP3.setEnabled(false);
+		     playerThreeBlockHolder.setEnabled(false);
+		     nextTurnP1.setEnabled(false);
+		     passP1.setEnabled(false);
+		     rotateLP4.setEnabled(false);
+		     mirrorP4.setEnabled(false);
+		     nextP1.addActionListener(new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e ) {
-						
-						if(e.getSource()==mirrorP2) {
-							block2 = blocksTools.getFlippedPiece(block2,  playerTwoBlockHolder, Color.red);			
+					if(e.getSource()==nextP1) {
+					  block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+
+						counter1++; 
+						if(counter1>21) {
+							counter1=1;
+							
 						}
-					}	
+						//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+						}
+					  } 
+					
 				});
-			 
+				  rotateLP1.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {		
+							if(e.getSource()==rotateLP1) {
+							block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
+							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							
+						}}	
+					});
+					mirrorP1.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {
+							
+							if(e.getSource()==mirrorP1) {
+								block1 = blocksTools.getFlippedPiece(block1,  playerOneBlockHolder, Color.blue);
+							//	theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							}
+						}	
+					});
+					
+				    playerOneButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);	
+							
+						}
+					});}});
+		    
+		     
+		 
+		    
+		  
+		    
+		    
+		    nextTurnP2.addActionListener(new ActionListener() {  
+		    @Override
+		    public void actionPerformed(ActionEvent e ) {
+		    nextTurnP2.setEnabled(false);
+		       passP2.setEnabled(false);
+		       rotateLP1.setEnabled(false);
+		       mirrorP1.setEnabled(false);
+		       
+		       nextTurnP3.setEnabled(true);
+		       passP3.setEnabled(true);
+		       rotateLP2.setEnabled(true);
+		       mirrorP2.setEnabled(true);
+		       nextP2.addActionListener(new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e ) {
+					if(e.getSource()==nextP2) {
+					  block2 = blocksTools.getPiece(block2, counter2, playerTwoBlockHolder, Color.RED);
+
+						counter2++; 
+						if(counter2>21) {
+							counter2=1;
+							
+
+						}
+						//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
+						}
+					  } 
+				});
+				  rotateLP2.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {		
+							if(e.getSource()==rotateLP2) {
+							block2 = blocksTools.getRotatedPiece(block2,  playerTwoBlockHolder, Color.red);
+							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
+
+							
+						}}	
+					});
+					mirrorP2.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {
+							
+							if(e.getSource()==mirrorP2) {
+								block2 = blocksTools.getFlippedPiece(block2,  playerTwoBlockHolder, Color.red);	
+								
+
+							}
+						}	
+					});
+		       nextTurnP4.setEnabled(false);
+		       passP4.setEnabled(false);
+		       rotateLP3.setEnabled(false);
+		       mirrorP3.setEnabled(false);
+		       
+		       nextTurnP1.setEnabled(false);
+		       passP1.setEnabled(false);
+		       rotateLP4.setEnabled(false);
+		       mirrorP4.setEnabled(false);
+		     playerTwoButton.addActionListener(new ActionListener() {
 				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
+					
+				}
+			});
+		    }
+		    
+		   });
+
+		   
+		   nextTurnP3.addActionListener(new ActionListener() { 
+		     @Override
+		     public void actionPerformed(ActionEvent e ) {
+		      nextTurnP2.setEnabled(false);
+		      passP2.setEnabled(false);
+		      rotateLP1.setEnabled(false);
+		      mirrorP1.setEnabled(false);
+		      
+		      nextTurnP3.setEnabled(false);
+		      passP3.setEnabled(false);
+		      rotateLP2.setEnabled(false);
+		      mirrorP2.setEnabled(false);
+		      
+		      nextTurnP4.setEnabled(true);
+		      passP4.setEnabled(true);
+		      rotateLP3.setEnabled(true);
+		      mirrorP3.setEnabled(true);
+		      
+		      nextTurnP1.setEnabled(false);
+		      passP1.setEnabled(false);
+		      rotateLP4.setEnabled(false);
+		      mirrorP4.setEnabled(false);
+		  	
 				nextP3.addActionListener(new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e ) {
@@ -250,7 +377,11 @@ public class Gui {
 						counter3++; 
 						if(counter3>21) {
 							counter3=1;
-						}}
+						}
+						
+						theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block3, Color.YELLOW);	 }
+				
+
 					  } 
 				});
 				  rotateLP3.addActionListener(new ActionListener() { 	
@@ -259,7 +390,7 @@ public class Gui {
 						public void actionPerformed(ActionEvent e ) {		
 							if(e.getSource()==rotateLP3) {
 							block3 = blocksTools.getRotatedPiece(block3,  playerThreeBlockHolder, Color.yellow);
-							
+							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block3, Color.YELLOW);	 
 						}}	
 					});
 					mirrorP3.addActionListener(new ActionListener() { 	
@@ -268,185 +399,199 @@ public class Gui {
 						public void actionPerformed(ActionEvent e ) {
 							
 							if(e.getSource()==mirrorP3) {
-								block3 = blocksTools.getFlippedPiece(block3,  playerThreeBlockHolder,  Color.yellow);			
+								block3 = blocksTools.getFlippedPiece(block3,  playerThreeBlockHolder,  Color.yellow);	
+								theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block3, Color.YELLOW);	 
 							}
 						}	
 					});
 				 
-					nextP4.addActionListener(new ActionListener() { 
-						@Override
-						public void actionPerformed(ActionEvent e ) {
-						if(e.getSource()==nextP4) {
-						  block4= blocksTools.getPiece(block4, counter4, playerFourBlockHolder, Color.GREEN);
-
-							counter4++; 
-							if(counter4>21) {
-								counter4=1;
-							}}
-						  } 
-					});
-					  rotateLP4.addActionListener(new ActionListener() { 	
-							
-							@Override
-							public void actionPerformed(ActionEvent e ) {		
-								if(e.getSource()==rotateLP4) {
-								block4 = blocksTools.getRotatedPiece(block4,  playerFourBlockHolder, Color.GREEN);
-								
-							}}	
-						});
-						mirrorP4.addActionListener(new ActionListener() { 	
-							
-							@Override
-							public void actionPerformed(ActionEvent e ) {
-								
-								if(e.getSource()==mirrorP4) {
-									block4 = blocksTools.getFlippedPiece(block4,  playerFourBlockHolder,  Color.green);			
-								}
-							}	
-						});
-	
-		playerOneButton.addActionListener(new ActionListener() 
-		{ 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-		  for (int i =0; i<(20); i++){
-				for(int j =0; j<20; j++) {
-					
-					blockTestIntegers[i][j] = 0; 
-				
-					final int row=i; 
-					final int col=j;
-				
-				
-					   boardGridValue[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
-				 		Color color = boardGridValue[row][col].getForeground();
-				 	    public void mouseReleased(MouseEvent evt) {
-					    	if(evt.getSource() == boardGridValue[row][col])
-					    	{
-					    		for(int i=row; i<row+5; i++)
-								{
-									
-									for (int j=col; j<col+5; j++)
-									{
-										
-										blockTestIntegers[i][j] = block1[i-row][j-col]; 
-										if(blockTestIntegers[i][j]==1)
-										{
-											boardGridValue[i][j].setBackground(Color.BLUE);
-										}	
-									}
-								}
-					    	}}
-				 	   public void mouseClicked(MouseEvent evt) {
-					    	if(evt.getSource() == boardGridValue[row][col])
-					    	{
-					    		for(int i=row; i<row+5; i++)
-								{
-									
-									for (int j=col; j<col+5; j++)
-									{
-										
-										blockTestIntegers[i][j] = block1[i-row][j-col]; 
-										if(blockTestIntegers[i][j]==1)
-										{
-											boardGridValue[i][j].setBackground(Color.BLUE);
-											color = boardGridValue[i][j].getBackground();
-										}	
-									}
-								}
-					    	}
-					    }
-				}); }} }}); 
-					 
-				  
-			  
-			
-		  
-		
-		playerTwoButton.addActionListener(new ActionListener() 
-		{ 
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-		  for (int i =0; i<(20); i++){
-				for(int j =0; j<20; j++) {
-					
-					blockTestIntegers[i][j] = 0; 
-					final int row=i; 
-					final int col=j;
-				
-				
-					   boardGridValue[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
-				 		Color color = boardGridValue[row][col].getForeground();
-				 	    public void mouseReleased(MouseEvent evt) {
-					    	if(evt.getSource() == boardGridValue[row][col])
-					    	{
-					    		for(int i=row; i<row+5; i++)
-								{
-									
-									for (int j=col; j<col+5; j++)
-									{
-										blockTestIntegers[row][col] = 0; 
-										blockTestIntegers[i][j] = block2[i-row][j-col]; 
-										if(blockTestIntegers[i][j]==1)
-										{
-											boardGridValue[i][j].setBackground(Color.RED);
-										}	
-									}
-								}
-					    	}}
-				 	   public void mouseClicked(MouseEvent evt) {
-					    	if(evt.getSource() == boardGridValue[row][col])
-					    	{
-					    		for(int i=row; i<row+5; i++)
-								{
-									
-									for (int j=col; j<col+5; j++)
-									{
-										blockTestIntegers[row][col] = 0;
-										blockTestIntegers[i][j] = block2[i-row][j-col]; 
-										if(blockTestIntegers[i][j]==1)
-										{
-											boardGridValue[i][j].setBackground(Color.RED);
-											color = boardGridValue[i][j].getBackground();
-										}	
-									}
-								}
-					    	}
-					    }
-				}); }} }}); 
-	
-		 playerOnePanel.add(testJLabel); 
-		  
-/*		playerOneButton.addActionListener(new ActionListener() { 	
-			
-			@Override
-			public void actionPerformed(ActionEvent e ) {
-			
-				theBoard.gridValue(boardGridValue, 2, 2, block1);
-				
-			}
-			
-		});*/
-		 
-	/*	for(int i=0; i<20; i++)
-		{
-			for(int j=0; j<20; j++)
-			{
-				final row = i;
-				final col = j;
-				boardGridValue[i][j].addActionListener(new ActionListener() { 	
+		     }
+		   });
+		   
+		   nextTurnP4.addActionListener(new ActionListener() { 
+		     @Override
+		     public void actionPerformed(ActionEvent e ) {
+		      nextTurnP2.setEnabled(false);
+		      passP2.setEnabled(false);
+		      rotateLP1.setEnabled(false);
+		      mirrorP1.setEnabled(false);
+		      
+		      nextTurnP3.setEnabled(false);
+		      passP3.setEnabled(false);
+		      rotateLP2.setEnabled(false);
+		      mirrorP2.setEnabled(false);
+		      
+		      nextTurnP4.setEnabled(false);
+		      passP4.setEnabled(false);
+		      rotateLP3.setEnabled(false);
+		      mirrorP3.setEnabled(false);
+		      
+		      nextTurnP1.setEnabled(true);
+		      passP1.setEnabled(true);
+		      rotateLP4.setEnabled(true);
+		      mirrorP4.setEnabled(true);
+		  	
+				nextP1.addActionListener(new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e ) {
-						theBoard.gridValue(boardGridValue, i, j, block1);
+					if(e.getSource()==nextP1) {
+					  block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+
+						counter1++; 
+						if(counter1>21) {
+							counter1=1;
+							
+						}
+						theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);}
+					  } 
+					
+				});
+				  rotateLP1.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {		
+							if(e.getSource()==rotateLP1) {
+							block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
+							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							
+						}}	
+					});
+					mirrorP1.addActionListener(new ActionListener() { 	
+						
+						@Override
+						public void actionPerformed(ActionEvent e ) {
+							
+							if(e.getSource()==mirrorP1) {
+								block1 = blocksTools.getFlippedPiece(block1,  playerOneBlockHolder, Color.blue);
+								theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							}
+						}	
+					});
+	
+		      
+		     }
+		   });
+		   
+		   nextTurnP1.addActionListener(new ActionListener() { 
+		     @Override
+		     public void actionPerformed(ActionEvent e ) {
+		      nextTurnP2.setEnabled(true);
+		      passP2.setEnabled(true);
+		      rotateLP1.setEnabled(true);
+		      mirrorP1.setEnabled(true);
+		   
+		      
+		      nextTurnP3.setEnabled(false);
+		      passP3.setEnabled(false);
+		      rotateLP2.setEnabled(false);
+		      mirrorP2.setEnabled(false);
+		      
+		      nextTurnP4.setEnabled(false);
+		      passP4.setEnabled(false);
+		      rotateLP3.setEnabled(false);
+		      mirrorP3.setEnabled(false);
+		  	nextP4.addActionListener(new ActionListener() { 
+				@Override
+				public void actionPerformed(ActionEvent e ) {
+				if(e.getSource()==nextP4) {
+				  block4= blocksTools.getPiece(block4, counter4, playerFourBlockHolder, Color.GREEN);
+
+					counter4++; 
+					if(counter4>21) {
+						counter4=1;
 					}
-			
+					theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block4, Color.green);
+					}
+				  } 
+			});
+			  rotateLP4.addActionListener(new ActionListener() { 	
+					
+					@Override
+					public void actionPerformed(ActionEvent e ) {		
+						if(e.getSource()==rotateLP4) {
+						block4 = blocksTools.getRotatedPiece(block4,  playerFourBlockHolder, Color.GREEN);
+						theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block4, Color.green);
+					}}	
+				});
+				mirrorP4.addActionListener(new ActionListener() { 	
+					
+					@Override
+					public void actionPerformed(ActionEvent e ) {
+						
+						if(e.getSource()==mirrorP4) {
+							block4 = blocksTools.getFlippedPiece(block4,  playerFourBlockHolder,  Color.green);			
+							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block4, Color.green);
+						}
+					}	
 				});
 				
-		}}*/
+		      nextTurnP1.setEnabled(false);
+		      passP1.setEnabled(false);
+		      rotateLP4.setEnabled(false);
+		      mirrorP4.setEnabled(false);
+
+			
+		     }
+		   });
+		   
+		   passP2.addActionListener(new ActionListener() { 
+		     @Override
+		     public void actionPerformed(ActionEvent e ) {
+		      nextTurnP2.setEnabled(false);
+		      passP2.setEnabled(false);
+		      rotateLP1.setEnabled(false);
+		      mirrorP1.setEnabled(false);
+		      
+		      nextTurnP3.setEnabled(true);
+		      passP3.setEnabled(true);
+		      rotateLP2.setEnabled(true);
+		      mirrorP2.setEnabled(true);
+		      
+		      nextTurnP4.setEnabled(false);
+		      passP4.setEnabled(false);
+		      rotateLP3.setEnabled(false);
+		      mirrorP3.setEnabled(false);
+		      
+		      nextTurnP1.setEnabled(false);
+		      passP1.setEnabled(false);
+		      rotateLP4.setEnabled(false);
+		      mirrorP4.setEnabled(false);
+		     }
+		   });
+		   
+		   passP3.addActionListener(new ActionListener() { 
+		     @Override
+		     public void actionPerformed(ActionEvent e ) {
+		      nextTurnP2.setEnabled(false);
+		      passP2.setEnabled(false);
+		      rotateLP1.setEnabled(false);
+		      mirrorP1.setEnabled(false);
+		      
+		      nextTurnP3.setEnabled(false);
+		      passP3.setEnabled(false);
+		      rotateLP2.setEnabled(false);
+		      mirrorP2.setEnabled(false);
+		      
+		      nextTurnP4.setEnabled(true);
+		      passP4.setEnabled(true);
+		      rotateLP3.setEnabled(true);
+		      mirrorP3.setEnabled(true);
+		      
+		      nextTurnP1.setEnabled(false);
+		      passP1.setEnabled(false);
+		      rotateLP4.setEnabled(false);
+		      mirrorP4.setEnabled(false);
+		     }
+		   });
+			
+			 
+			
 		
-	//	theBoard.gridValue(boardGridValue, 0, 5, block2);
+	
+				
+			
+	
+		
 
 		//BLOCKS HOLDER
 		playerOnePanel.setPreferredSize(new Dimension(1000,400));

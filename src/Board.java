@@ -22,12 +22,11 @@ public class Board {
 		return 0;  
 	}
 	
-	public JButton[][] boardGrid(JPanel panel)
+	public JButton[][] boardGrid(JPanel panel, Integer[][] blockOnBoard)
 	{
 		
 		//GRID 
 		
-				JButton[][] clickedGrid = new JButton[20][20];
 				
 				JButton[][] grid= new JButton[20][20];
 				Integer[][] gridValue = new Integer[20][20]; 
@@ -37,11 +36,10 @@ public class Board {
 					for(int j =0; j<20; j++) {
 						
 						gridValue[i][j] = 0; 
-						grid[i][j] = new JButton(); 
-						final int row=i; 
-						final int col=j;
-					
+						blockOnBoard[i][j] = 0; 
 						
+						grid[i][j] = new JButton(); 
+						//grid[i][j].setText("" + gridValue[i][j]);
 						// final JButton square = new JButton();
 						 grid[i][j].setBackground(Color.white);
 						 grid[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -49,99 +47,124 @@ public class Board {
 					     grid[i][j].setOpaque(true);
 						    panel.add(grid[i][j]);
 						 	
-						
-//							   grid[i][j].addChangeListener(new ChangeListener() {
-//						            @Override
-//						            public void stateChanged(ChangeEvent evt) {
-//						            	if(evt.getSource() == grid[row][col])
-//										{
-//											for(int i=row; i<row+5; i++)
-//											{
-//												
-//												for (int j=col; j<col+5; j++)
-//												{
-//													gridValue[i][j] = 0; 
-//													gridValue[i][j] = block[i-row][j-col]; 
-//													if(gridValue[i][j]==1)
-//													{
-//													if (grid[row][col].getModel().isPressed()) {
-//									                    grid[i][j].setBackground(Color.blue);}
-//									               }
-//													
-//											}
-//										}
-//						                
-//						            }}});
-//						   
-//						grid[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
-//						 		Color color = grid[row][col].getForeground();
-//						 	    public void mouseReleased(MouseEvent evt) {
-//							    	if(evt.getSource() == grid[row][col])
-//							    	{
-//							    		for(int i=row; i<row+5; i++)
-//										{
-//											
-//											for (int j=col; j<col+5; j++)
-//											{
-//												
-//												gridValue[i][j] = block[i-row][j-col]; 
-//												if(gridValue[i][j]==1)
-//												{
-//													grid[i][j].setBackground(Color.BLUE);
-//												}	
-//											}
-//										}
-//							    	}}
-//						 	   public void mouseClicked(MouseEvent evt) {
-//							    	if(evt.getSource() == grid[row][col])
-//							    	{
-//							    		for(int i=row; i<row+5; i++)
-//										{
-//											
-//											for (int j=col; j<col+5; j++)
-//											{
-//												
-//												gridValue[i][j] = block[i-row][j-col]; 
-//												if(gridValue[i][j]==1)
-//												{
-//													grid[i][j].setBackground(Color.BLUE);
-//													color = grid[i][j].getBackground();
-//												}	
-//											}
-//										}
-//							    	}
-//							    }
-//						});
-//						    
+
 					}
 				}
-				
-				
 				
 				return grid; 
 				
 	}
 	
-	/*public void gridValue(JButton[][] grid, int x, int y, Integer[][] block)
+	public void gridClicked(JPanel panel, JButton[][] grid,  Integer[][] blockOnBoard, Integer[][] piece, Color color)
 	{
-		
-		Integer[][] gridValue = new Integer[20][20]; 
-		for(int i=x; i<x+5; i++)
-		{
-			
-			for (int j=y; j<y+5; j++)
-			{
-				row = x; 
-				col = y; 
-				gridValue[i][j] = 0; 
-				gridValue[i][j] = block[i-x][j-y]; 
+		 
+		  for (int i =0; i<(20); i++){
+				for(int j =0; j<20; j++) {
+					
+					
+				//	grid[i][j].setText(""+blockOnBoard[i][j]);
+					final int row=i; 
+					final int col=j;
+				    
+					 
+					   grid[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
 				
-				/*
-				if(gridValue[i][j]==1)
-				{
-					grid[i][j].setBackground(Color.BLUE);
-				}	
-			}
-		}
-	}*/
-}
+				 	   public void mouseClicked(MouseEvent evt) {
+				 		   if(evt.getClickCount()==2) {
+				 			 
+					    	if(evt.getSource() == grid[row][col])
+					    	{
+					    		
+					    		for(int i=row; i<row+5; i++)
+								{
+									
+									for (int j=col; j<col+5; j++)
+									{
+											
+										 blockOnBoard[i][j] = piece[i-row][j-col]; 
+										
+									
+										if(blockOnBoard[i][j]==1)
+										{
+											grid[i][j].setBackground(color);
+											piece[i-row][j-col] = 0; 
+										//    grid[i][j].setText("" + blockOnBoard[i][j]);
+										  
+										}
+										 
+										
+										
+									}
+								}
+					    	}
+					    }}
+				 	  public void mouseEntered(MouseEvent evt) {
+				 		 
+				 			 
+					    	if(evt.getSource() == grid[row][col])
+					    	{
+					    		
+					    		for(int i=row; i<row+5; i++)
+								{
+									
+									for (int j=col; j<col+5; j++)
+									{
+											
+										
+										
+										blockOnBoard[i][j] = piece[i-row][j-col]; 
+										if( blockOnBoard[i][j]==1)
+										{
+											grid[i][j].setBackground(Color.gray);
+											
+											
+											 
+										}
+										
+									
+										
+										
+										
+									}
+								}
+					    	
+					    }}
+				 	  
+					  public void mouseExited(MouseEvent evt) {
+					 		 
+				 			 
+					    	if(evt.getSource() == grid[row][col])
+					    	{
+					    		
+					    		for(int i=row; i<row+5; i++)
+								{
+									
+									for (int j=col; j<col+5; j++)
+									{
+										blockOnBoard[i][j] = piece[i-row][j-col];
+										if(blockOnBoard[i][j] == 1)
+										{
+											grid[i][j].setBackground(Color.white);
+										}
+								
+									
+									
+										
+										
+										
+									}
+								}
+					    	
+					    }}
+			
+				}); }
+					
+					   
+					   
+					
+				}}
+		  
+		 
+	}
+	
+
