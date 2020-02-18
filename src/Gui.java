@@ -42,11 +42,11 @@ public class Gui {
 	
 	 
 	
-    public Integer[][] blockTestIntegers = new Integer[20][20]; 
+    public Integer[][] blockTestIntegers = new Integer[25][25]; 
     public Integer[][] blockTestIntegers2 = new Integer[20][20]; 
 	public int currentCounter = 1; 
 	public int currentCounter2 = 1; 
-	public JButton[][] boardGridValue = new JButton[20][20];
+	public JButton[][] boardGridValue = new JButton[25][25];
 	public JButton[][] boardGridValue2 = new JButton[20][20];
 	public BlockData getBlockData = new BlockData(); 
 	public Board theBoard = new Board(); 
@@ -534,7 +534,7 @@ public class Gui {
 		     }
 		   });
 		   
-		   passP2.addActionListener(new ActionListener() { 
+		  /* passP2.addActionListener(new ActionListener() { 
 		     @Override
 		     public void actionPerformed(ActionEvent e ) {
 		      nextTurnP2.setEnabled(false);
@@ -582,7 +582,7 @@ public class Gui {
 		      rotateLP4.setEnabled(false);
 		      mirrorP4.setEnabled(false);
 		     }
-		   });
+		   });*/
 			
 			 
 			

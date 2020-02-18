@@ -62,40 +62,42 @@ public class Board {
 				for(int j =0; j<20; j++) {
 					
 					
-				//	grid[i][j].setText(""+blockOnBoard[i][j]);
+					
 					final int row=i; 
 					final int col=j;
 				    
-					 
+					
 					   grid[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
-				
+							public Color oldColor;
 				 	   public void mouseClicked(MouseEvent evt) {
+				 		   
 				 		   if(evt.getClickCount()==2) {
 				 			 
 					    	if(evt.getSource() == grid[row][col])
 					    	{
-					    		
+					    		if(row+5 <=20 && col+5<=20) {
 					    		for(int i=row; i<row+5; i++)
 								{
 									
 									for (int j=col; j<col+5; j++)
 									{
-											
-										 blockOnBoard[i][j] = piece[i-row][j-col]; 
-										
-									
-										if(blockOnBoard[i][j]==1)
+										if(blockOnBoard[i][j] == 0)
 										{
+										
+										if(piece[i-row][j-col]==1)
+										{
+											blockOnBoard[i][j] = 1; 
 											grid[i][j].setBackground(color);
+											oldColor = grid[i][j].getBackground(); 
 											piece[i-row][j-col] = 0; 
-										//    grid[i][j].setText("" + blockOnBoard[i][j]);
-										  
+											  
 										}
-										 
+										}
+										
 										
 										
 									}
-								}
+								}}
 					    	}
 					    }}
 				 	  public void mouseEntered(MouseEvent evt) {
@@ -103,7 +105,7 @@ public class Board {
 				 			 
 					    	if(evt.getSource() == grid[row][col])
 					    	{
-					    		
+					    		if(row+5 <=20 && col+5<=20) {
 					    		for(int i=row; i<row+5; i++)
 								{
 									
@@ -111,22 +113,23 @@ public class Board {
 									{
 											
 										
-										
-										blockOnBoard[i][j] = piece[i-row][j-col]; 
-										if( blockOnBoard[i][j]==1)
+											
+											
+										if(piece[i-row][j-col] == 1)
 										{
+											if(blockOnBoard[i][j] == 0 && (i<20 && j<20))
+											{
+											if(grid[i][j].getBackground()==Color.white)
 											grid[i][j].setBackground(Color.gray);
 											
-											
-											 
 										}
 										
-									
 										
+										}
 										
 										
 									}
-								}
+								}}
 					    	
 					    }}
 				 	  
@@ -135,16 +138,19 @@ public class Board {
 				 			 
 					    	if(evt.getSource() == grid[row][col])
 					    	{
-					    		
+					    		if(row+5 <=20 && col+5<=20) {
 					    		for(int i=row; i<row+5; i++)
 								{
 									
 									for (int j=col; j<col+5; j++)
 									{
-										blockOnBoard[i][j] = piece[i-row][j-col];
-										if(blockOnBoard[i][j] == 1)
+										if(piece[i-row][j-col] == 1 && (i<20 && j<20))
 										{
+											
+											 if(grid[i][j].getBackground()==Color.gray) {
 											grid[i][j].setBackground(Color.white);
+											}
+											
 										}
 								
 									
@@ -153,7 +159,7 @@ public class Board {
 										
 										
 									}
-								}
+								}}
 					    	
 					    }}
 			
