@@ -116,7 +116,7 @@ public class Board {
 											grid[i][j].setText("" + blockOnBoard[row][col]);
 											grid[i][j].setEnabled(false);
 										}
-										else if(piece[i-row][j-col]!=1 && blockOnBoard[row][col]!=1){
+										else if(grid[i][j].getBackground()!=Color.blue){
 											{
 												grid[i][j].setBackground(Color.white);
 												blockOnBoard[row][col] = 0; 
