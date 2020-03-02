@@ -51,13 +51,13 @@ private BlockData  getBlockData= new BlockData();
 	
 	public Integer[][] getRotatedPiece(Integer[][] blockID, JPanel blockHolderP1, Color color)
 	{
-		blockHolderP1.removeAll(); 
-		blockHolderP1.revalidate(); 
-		blockHolderP1.repaint(); 
+		
 		
 		blockID = rotate(blockID);
 		
-
+		blockHolderP1.removeAll(); 
+		blockHolderP1.revalidate(); 
+		blockHolderP1.repaint(); 
 		getBlockData.paintBlocksButtons(
 				blockID,color,
 				blockHolderP1);
@@ -73,7 +73,14 @@ private BlockData  getBlockData= new BlockData();
 		
 		blockID = flipHorizontal(blockID);
 		
-
+		for(int i=0; i<5; i++) {
+			for(int j=0; j<5; j++) {
+				System.out.print(blockID[i][j] + " ");
+			}
+			System.out.print("/n");
+		}
+				
+			
 		getBlockData.paintBlocksButtons(
 				blockID,color,
 				blockHolderP1);

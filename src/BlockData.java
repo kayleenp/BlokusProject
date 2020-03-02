@@ -215,7 +215,8 @@ public class BlockData {
 	
 	public void paintBlocksButtons(Integer[][] blockValues, Color color, JPanel panel) {
 		JButton[][] blocksPainted = new JButton[5][5]; 
-		Integer[][] tempIntegers = new Integer[5][5]; 
+		Integer[][] tempIntegers =  {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}}; 
+		
 		tempIntegers = blockValues;
 		blocksPainted = new JButton[5][5]; 
 		panel.setLayout(new GridLayout(5,5));
@@ -225,14 +226,16 @@ public class BlockData {
 			    	blocksPainted[i][j] = new JButton();
 			    	blocksPainted[i][j].setVisible(false);
 			    	
-			    	
 			    	blocksPainted[i][j].setBackground(Color.WHITE);
 			    	
 			    	
 			       	if(tempIntegers[i][j]==1) {
+			       	
 			    	blocksPainted[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			        blocksPainted[i][j].setBackground(color);
 			        blocksPainted[i][j].setVisible(true);
+			        
+			        
 			        
 			       	}
 			       	else if(tempIntegers[i][j]==2)
@@ -249,6 +252,9 @@ public class BlockData {
 			       	}
 			       
 			       	panel.add(blocksPainted[i][j]);
+			       	blocksPainted[i][j].removeAll();
+			    	blocksPainted[i][j].revalidate();
+			    	blocksPainted[i][j].repaint();
 			    	 
 			      
 			    }

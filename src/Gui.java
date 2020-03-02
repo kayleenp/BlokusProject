@@ -42,12 +42,12 @@ public class Gui {
 	
 	 
 	
-    public Integer[][] blockTestIntegers = new Integer[25][25]; 
-    public Integer[][] blockTestIntegers2 = new Integer[20][20]; 
+    public Integer[][] blockTestIntegers = new Integer[30][30]; 
+    public Integer[][] blockTestIntegers2 = new Integer[30][30]; 
 	public int currentCounter = 1; 
 	public int currentCounter2 = 1; 
-	public JButton[][] boardGridValue = new JButton[25][25];
-	public JButton[][] boardGridValue2 = new JButton[20][20];
+	public JButton[][] boardGridValue = new JButton[30][30];
+	public JButton[][] boardGridValue2 = new JButton[30][30];
 	public BlockData getBlockData = new BlockData(); 
 	public Board theBoard = new Board(); 
 	private int counter = 1;
@@ -70,7 +70,7 @@ public class Gui {
 		blokusFrame.setVisible(true);
 		
 		//Grid
-		GridLayout gridLayout= new GridLayout(20,20);
+		GridLayout gridLayout= new GridLayout(30,30);
 		
 		//Blokus Panel 
 		JPanel playerOnePanel = new JPanel(); 
@@ -236,12 +236,15 @@ public class Gui {
 					
 				});
 				  rotateLP1.addActionListener(new ActionListener() { 	
-						
 						@Override
 						public void actionPerformed(ActionEvent e ) {		
+							Integer[][] temp_block1= new Integer[5][5]; 
 							if(e.getSource()==rotateLP1) {
+							
 							block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
-							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							
+							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							
 							
 						}}	
 					});
@@ -252,16 +255,18 @@ public class Gui {
 							
 							if(e.getSource()==mirrorP1) {
 								block1 = blocksTools.getFlippedPiece(block1,  playerOneBlockHolder, Color.blue);
-							//	theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+								theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							//	theBoard.gridClicked(boardPanel, boardGridValue, b, block1, Color.blue);
 							}
 						}	
 					});
 					
 				    playerOneButton.addActionListener(new ActionListener() {
 						
-						@Override
+					
+				    	@Override
 						public void actionPerformed(ActionEvent e) {
-							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);	
+							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);	
 							
 						}
 					});}});
@@ -451,7 +456,11 @@ public class Gui {
 						@Override
 						public void actionPerformed(ActionEvent e ) {		
 							if(e.getSource()==rotateLP1) {
+							playerOneBlockHolder.revalidate();
+							playerOneBlockHolder.repaint();
+							
 							block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
+							
 							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
 							
 						}}	
