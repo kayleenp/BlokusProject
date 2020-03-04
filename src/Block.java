@@ -119,23 +119,7 @@ private BlockData  getBlockData= new BlockData();
 		return rotatedMatrix;
 	}
 	
-	public void rotateButtonController(JPanel panel, JButton rotateButton, Integer[][] block1) {
-		rotateButton.addActionListener(new ActionListener() { 	
-			@Override
-			public void actionPerformed(ActionEvent e ) {
-				panel.removeAll();
-				panel.revalidate();
-				panel.repaint();
-				
-				
-				getBlockData.paintBlocksButtons(
-						rotate(block1), Color.blue,
-						panel);
-				
-			
-			}
-});
-	}
+	
 	
 
 	public void place() {

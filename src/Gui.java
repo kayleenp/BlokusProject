@@ -201,6 +201,8 @@ public class Gui {
 		     startBlokus.addActionListener(new ActionListener() {  
 				    @Override
 				    public void actionPerformed(ActionEvent e ) {    
+				    	 block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+				    	
 				    	passP2.setEnabled(true);
 					     rotateLP1.setEnabled(true);
 					     mirrorP1.setEnabled(true);
@@ -230,7 +232,147 @@ public class Gui {
 							counter1=1;
 							
 						}
-						//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+						 for (int i =0; i<(30); i++){
+								for(int j =0; j<30; j++) {
+									
+									boardGridValue[i][j].setText("" + blockTestIntegers[i][j]);
+									
+									
+									final int row=i; 
+									final int col=j;
+									
+								  boardGridValue[i][j].addMouseListener(new java.awt.event.MouseAdapter() {
+											public Color oldColor;
+											
+								 	   public void mouseClicked(MouseEvent evt) {
+								 		   
+								 		   if(evt.getClickCount()==1) {
+								 			   
+								 			   
+								 			 //INI DIBUAT FUNGSI YOW
+									    	if(evt.getSource() == boardGridValue[row][col])
+									    	{
+									    		
+									    		for(int i=0; i<5; i++)
+												{
+													
+													for (int j=0; j<5; j++)
+													{
+														
+														if(block1[i][j]>=1)
+														{
+															
+															
+															blockTestIntegers[row+i][col+j] = 2;
+															boardGridValue[row+i][col+j].setText("" + blockTestIntegers[row+i][col+j]);
+																	
+																
+															
+															boardGridValue[i+row][j+col].setBackground(Color.blue);
+															oldColor = boardGridValue[i][j].getBackground(); 
+															
+															 
+															
+																
+														}
+														
+														
+																							
+														
+														
+														
+														}
+														
+
+										    	
+													
+												}
+														
+													
+													
+												}
+									    	}	
+								 		  
+											System.out.print("NEXT PLAYER"); 
+									    	
+									    	//next player and remove piece 
+									    }
+								 	  public void mouseEntered(MouseEvent evt) {
+								 		 
+								 			 
+									    	if(evt.getSource() == boardGridValue[row][col])
+									    	{
+									    		if(row+5 <=30 && col+5<=30) {
+									    		for(int i=row; i<row+5; i++)
+												{
+													
+													for (int j=col; j<col+5; j++)
+													{
+															
+														if(block1[i-row][j-col] == 1)
+														{
+															
+															if(blockTestIntegers[i][j] == 0 ){
+															{
+															if(boardGridValue[i][j].getBackground()==Color.white) {
+															boardGridValue[i][j].setBackground(Color.gray);
+															
+															}
+															
+														}
+															
+														
+														
+														}
+														else {
+															if(boardGridValue[i][j].getBackground()==Color.gray) {
+																boardGridValue[i][j].setBackground(Color.white);
+																
+																}
+														}
+														}
+														
+													}
+												}}
+									    	
+									    }}
+								 	  
+									  public void mouseExited(MouseEvent evt) {
+									 		 
+								 			 
+									    	if(evt.getSource() == boardGridValue[row][col])
+									    	{
+									    		if(row+5 <=30 && col+5<=30) {
+									    		for(int i=row; i<row+5; i++)
+												{
+													
+													for (int j=col; j<col+5; j++)
+													{
+															 if(boardGridValue[i][j].getBackground()==Color.gray) {
+															boardGridValue[i][j].setBackground(Color.white);
+															}
+															
+														
+														
+													
+													
+														
+														
+														
+													}
+												}}
+									    	
+									    }}
+							
+								});
+								
+								}
+									
+									   
+									   
+									
+								}
+						  
 						}
 					  } 
 					
@@ -239,14 +381,16 @@ public class Gui {
 						@Override
 						public void actionPerformed(ActionEvent e ) {		
 							Integer[][] temp_block1= new Integer[5][5]; 
-							if(e.getSource()==rotateLP1) {
 							
-							block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
+							if(e.getSource()==rotateLP1) {
+								block1 = blocksTools.getRotatedPiece(block1,  playerOneBlockHolder, Color.blue);
+							
+							
 							
 							theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
 							
-							
-						}}	
+						}
+							}	
 					});
 					mirrorP1.addActionListener(new ActionListener() { 	
 						
@@ -256,25 +400,20 @@ public class Gui {
 							if(e.getSource()==mirrorP1) {
 								block1 = blocksTools.getFlippedPiece(block1,  playerOneBlockHolder, Color.blue);
 								theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
+							//	theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);
 							//	theBoard.gridClicked(boardPanel, boardGridValue, b, block1, Color.blue);
 							}
 						}	
 					});
 					
-				    playerOneButton.addActionListener(new ActionListener() {
-						
-					
-				    	@Override
-						public void actionPerformed(ActionEvent e) {
-							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block1, Color.blue);	
-							
-						}
-					});}});
+				   }});
 		    
 		     
 		 
 		    
-		  
+		     	
+				
+				
 		    
 		    
 		    nextTurnP2.addActionListener(new ActionListener() {  
@@ -337,6 +476,7 @@ public class Gui {
 		       passP1.setEnabled(false);
 		       rotateLP4.setEnabled(false);
 		       mirrorP4.setEnabled(false);
+		       
 		     playerTwoButton.addActionListener(new ActionListener() {
 				
 				@Override
@@ -542,6 +682,8 @@ public class Gui {
 			
 		     }
 		   });
+		   
+		  
 		   
 		  /* passP2.addActionListener(new ActionListener() { 
 		     @Override

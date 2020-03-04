@@ -223,9 +223,10 @@ public class BlockData {
 		
 			   for (int i =0; i<(5); i++){
 			    for(int j =0; j<5; j++) {
-			    	blocksPainted[i][j] = new JButton();
-			    	blocksPainted[i][j].setVisible(false);
 			    	
+			    	blocksPainted[i][j] = new JButton();
+			    	//blocksPainted[i][j].setVisible(false);
+			    	blocksPainted[i][j].setText(""+tempIntegers[i][j]);
 			    	blocksPainted[i][j].setBackground(Color.WHITE);
 			    	
 			    	
@@ -234,7 +235,7 @@ public class BlockData {
 			    	blocksPainted[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			        blocksPainted[i][j].setBackground(color);
 			        blocksPainted[i][j].setVisible(true);
-			        
+			        blocksPainted[i][j].setText(""+tempIntegers[i][j]);
 			        
 			        
 			       	}
