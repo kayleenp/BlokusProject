@@ -16,4 +16,5 @@ public class Player {
 		currentPlayer.setEnabled(false);
 		nextPlayer.setEnabled(true);;
 	}
+
 }
