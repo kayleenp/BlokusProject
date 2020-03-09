@@ -41,6 +41,14 @@ public class BlockData {
     {
     
       block[2][2]=1;
+      block[1][1]=-1;
+      block[1][3]=-1;
+      block[3][1]=-1;
+      block[3][3]=-1;
+      block[1][2]=-2; 
+      block[3][2]=-2;
+      block[2][1]=-2;
+      block[2][3]=-2;
     }
     
     

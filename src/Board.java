@@ -66,6 +66,8 @@ public class Board {
 	public void gridClicked(MouseEvent evt, JButton[][] grid,  Integer[][] boardValueInteger, Integer[][] pieceIntegers , Color color, int row, int col, int playerValue)
 	{
 		
+
+		   boolean adaPiece = false; 
 		
 		   if(evt.getClickCount()==1) {
  			   
@@ -81,28 +83,50 @@ public class Board {
 						for (int j=0; j<5; j++)
 						{
 							
-							if(pieceIntegers[i][j]>=1)
+							if(pieceIntegers[i][j]>=1 || pieceIntegers[i][j]==-2)
 							{
+								if(boardValueInteger[row+i-2][col+j-2]!=0) {
+									System.out.println("GABISA WOY");
+									adaPiece = true; 
+								}
 								
 								
-								boardValueInteger[row+i-2][col+j-2] = playerValue;
-								
-								grid[row+i-2][col+j-2].setText("" + boardValueInteger[row+i-2][col+j-2]);
-										
-								grid[i+row-2][j+col-2].setBackground(color);
 							}
+							
+							
+							}
+								
+							}
+		    		for(int i=0; i<5; i++)
+					{
 						
+						for (int j=0; j<5; j++)
+						{
+							if(adaPiece==false) {
+								if(pieceIntegers[i][j]>=1) {
+									boardValueInteger[row+i-2][col+j-2] = playerValue;
+						
+									grid[row+i-2][col+j-2].setText("" + boardValueInteger[row+i-2][col+j-2]);
+								
+									grid[i+row-2][j+col-2].setBackground(color);}
+								if(pieceIntegers[i][j]==-2) {
+									boardValueInteger[row+i-2][col+j-2] = -2;
+						
+									grid[row+i-2][col+j-2].setText("" + boardValueInteger[row+i-2][col+j-2]);
+								
+									}
+								
 							}
-					}
+							
+							else { 
+								System.out.println("GABISA WOY");
+							}
+						}
 
-					}
-		    	}
-		    	}	
-	 		  
-				System.out.print("NEXT PLAYER"); 
+					} } } } }
 		    	
 		 
-		}
+		
 	
 	public void gridMouseEntered(MouseEvent evt, JButton[][] grid, Integer[][] boardValueIntegers, Integer[][] pieceIntegers, Color color, int row, int col)	  
 	{
