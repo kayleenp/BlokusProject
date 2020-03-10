@@ -25,7 +25,7 @@ public class Board {
 	public JButton[][] boardGrid(JPanel panel, Integer[][] blockOnBoard)
 	{
 		JButton[][] grid= new JButton[30][30];
-		Integer[][] gridValue = new Integer[30][30]; 
+		
 				
 				for (int i =0; i<(30); i++){
 					for(int j =0; j<30; j++) {
@@ -50,7 +50,7 @@ public class Board {
 						 grid[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
 						 grid[i][j].setContentAreaFilled(false);
 							blockOnBoard[i][j] = 0; 
-							gridValue[i][j] = 0; 
+					//		gridValue[i][j] = 0; 
 					     grid[i][j].setOpaque(true);
 						 }
 						
@@ -63,16 +63,16 @@ public class Board {
 				
 	}
 	
-	public void gridClicked(MouseEvent evt, JButton[][] grid,  Integer[][] boardValueInteger, Integer[][] pieceIntegers , Color color, int row, int col, int playerValue)
+	public void gridClicked(MouseEvent evt, JButton[][] grid,  Integer[][] boardValueInteger, 
+			Integer[][] pieceIntegers , Color color, int row, int col, int playerValue, 
+			boolean checkPiece[], int currentPiece, JButton nextButton)
 	{
 		
 
 		   boolean adaPiece = false; 
 		
 		   if(evt.getClickCount()==1) {
- 			   
- 			   
-	 			 //INI DIBUAT FUNGSI YOW
+
 		    	if(evt.getSource() == grid[row][col])
 		    	{
 		    		if(row<=25 && col<=25 && col>=5 && row>=5 ) {
@@ -83,14 +83,13 @@ public class Board {
 						for (int j=0; j<5; j++)
 						{
 							
-							if(pieceIntegers[i][j]>=1 || pieceIntegers[i][j]==-2)
+							if(pieceIntegers[i][j]>=1 )
 							{
 								if(boardValueInteger[row+i-2][col+j-2]!=0) {
 									System.out.println("GABISA WOY");
 									adaPiece = true; 
 								}
-								
-								
+		
 							}
 							
 							
@@ -102,19 +101,23 @@ public class Board {
 						
 						for (int j=0; j<5; j++)
 						{
+							
 							if(adaPiece==false) {
 								if(pieceIntegers[i][j]>=1) {
 									boardValueInteger[row+i-2][col+j-2] = playerValue;
 						
 									grid[row+i-2][col+j-2].setText("" + boardValueInteger[row+i-2][col+j-2]);
 								
-									grid[i+row-2][j+col-2].setBackground(color);}
-								if(pieceIntegers[i][j]==-2) {
+									grid[i+row-2][j+col-2].setBackground(color);
+									checkPiece[currentPiece] = true; 
+									
+								}
+							/*	if(pieceIntegers[i][j]==-2) {
 									boardValueInteger[row+i-2][col+j-2] = -2;
 						
 									grid[row+i-2][col+j-2].setText("" + boardValueInteger[row+i-2][col+j-2]);
 								
-									}
+									}*/
 								
 							}
 							

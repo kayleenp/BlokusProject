@@ -120,8 +120,9 @@ private BlockData  getBlockData= new BlockData();
 	}
 	
 	
-	
-
+	public void isPieceUsed(Integer player, boolean piece[] ) { 
+			
+	}
 	public void place() {
 		
 	}

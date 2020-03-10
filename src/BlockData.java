@@ -24,203 +24,478 @@ public class BlockData {
  public int[] edges;
 
 
-   
-   public Integer[][] Piece(Integer choosePiece) 
+ public Integer[][] Piece(Integer choosePiece) 
+ {
+  Integer[][] block = new Integer[5][5];
+  
+  for(int i=0; i<5; i++)
+  {
+   for(int j=0; j<5; j++)
    {
-    Integer[][] block = new Integer[5][5];
-    
-    for(int i=0; i<5; i++)
-    {
-     for(int j=0; j<5; j++)
-     {
-      block[i][j] = 0;
-     }
-    }
-    
-    if(choosePiece == 1)
-    {
-    
-      block[2][2]=1;
-      block[1][1]=-1;
-      block[1][3]=-1;
-      block[3][1]=-1;
-      block[3][3]=-1;
-      block[1][2]=-2; 
-      block[3][2]=-2;
-      block[2][1]=-2;
-      block[2][3]=-2;
-    }
-    
-    
-    if(choosePiece == 2)
-    {
-     block[2][1]=1;
-     block[2][2]=1;
-    }
-    
-    if(choosePiece == 3)
-    {
-     block[2][1]=1;
-     block[2][2]=1;
-     block[3][2]=1;
-    }
-    
-    if(choosePiece == 4)
-    {
-     block[2][1]=1;
-     block[2][2]=1;
-     block[2][3]=1;
-    }
-    if(choosePiece == 5)
-    {
-     block[2][1]=1;
-     block[2][2]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-    }
-    if(choosePiece == 6)
-    {
-     block[2][2]=1;
-     block[3][2]=1;
-     block[3][1]=1;
-     block[3][3]=1;
-    }
-    if(choosePiece == 7)
-    {
-     block[2][0]=1;
-     block[2][1]=1;
-     block[2][2]=1;
-     block[2][3]=1;
-    }
-    
-    if(choosePiece == 8)
-    {
-     block[3][0]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-     block[2][2]=1;
-    }
-    
-    if(choosePiece == 9)
-    {
-     block[3][1]=1;
-     block[3][2]=1;
-     block[2][2]=1;
-     block[2][3]=1;
-    }
-    
-    if(choosePiece == 10)
-    {
-     block[3][0]=1;
-     block[2][0]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-     block[3][3]=1;
-    }
-    
-    if(choosePiece == 11)
-    {
-     block[0][2]=1;
-     block[1][2]=1;
-     block[2][1]=1;
-     block[2][3]=1;
-     block[2][2]=1;
-    }
-    
-    if(choosePiece == 12)
-    {
-     block[1][1]=1;
-     block[2][1]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-     block[3][3]=1;
-    }
-    
-    if(choosePiece == 13)
-    {
-     block[3][0]=1;
-     block[3][1]=1;
-     block[2][1]=1;
-     block[2][2]=1;
-     block[2][3]=1;
-    }
-    
-    if(choosePiece == 14)
-    {
-     block[3][1]=1;
-     block[2][1]=1;
-     block[2][2]=1;
-     block[2][3]=1;
-     block[1][3]=1;
-    }
-    
-    if(choosePiece == 15)
-    {
-     block[2][2]=1;
-     block[0][2]=1;
-     block[1][2]=1;
-     block[3][2]=1;
-     block[4][2]=1;
-    }
-    
-    if(choosePiece == 16)
-    {
-     block[1][1]=1;
-     block[2][1]=1;
-     block[3][1]=1;
-     block[2][2]=1;
-     block[3][2]=1;
-    }
-    
-    if(choosePiece == 17)
-    {
-     block[3][1]=1;
-     block[2][1]=1;
-     block[2][2]=1;
-     block[1][2]=1;
-     block[1][3]=1;
-    }
-    
-    if(choosePiece == 18)
-    {
-     block[1][1]=1;
-     block[1][2]=1;
-     block[2][1]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-    }
-    
-    if(choosePiece == 19)
-    {
-     block[2][1]=1;
-     block[2][2]=1;
-     block[3][2]=1;
-     block[1][2]=1;
-     block[1][3]=1;
-    }
-    
-    if(choosePiece == 20)
-    {
-     block[1][2]=1;
-     block[2][2]=1;
-     block[2][1]=1;
-     block[2][3]=1;
-     block[3][2]=1;
-    }
-    
-    if(choosePiece == 21)
-    {
-     block[2][1]=1;
-     block[3][0]=1;
-     block[3][1]=1;
-     block[3][2]=1;
-     block[3][3]=1;
-    }
-    
-    return block;
-
+    block[i][j] = 0;
    }
- 
+  }
+  
+  if(choosePiece == 1)
+  {
+  
+    block[2][2]=1;
+    block[1][1]=-1;
+    block[1][3]=-1;
+    block[3][1]=-1;
+    block[3][3]=-1;
+    block[1][2]=-2; 
+    block[3][2]=-2;
+    block[2][1]=-2;
+    block[2][3]=-2;
+  }
+  
+  
+  if(choosePiece == 2)
+  {
+   block[2][1]=1;
+   block[2][2]=1;
+   block[1][0]=-1;
+   block[1][3]=-1;
+   block[3][0]=-1;
+   block[3][3]=-1;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[3][1]=-2;
+   block[3][2]=-2;
+   block[2][0]=-2;
+   block[2][3]=-2;
+  }
+  
+  if(choosePiece == 3)
+  {
+   block[2][1]=1;
+   block[2][2]=1;
+   block[3][2]=1;
+   block[1][0]=-1;
+   block[1][0]=-1;
+   block[3][0]=-1;
+   block[4][1]=-1;
+   block[4][3]=-1;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[2][0]=-2;
+   block[2][3]=-2;
+   block[3][1]=-2;
+   block[4][2]=-2;
+   block[3][3]=-2;
+   block[1][3]=-1;
+  }
+  
+  if(choosePiece == 4)
+  {
+   block[2][1]=1;
+   block[2][2]=1;
+   block[2][3]=1;
+   block[1][0]=-1;
+   block[3][0]=-1;
+   block[1][4]=-1;
+   block[3][4]=-1;
+   block[1][2]=-2;
+   block[1][1]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][4]=-2;
+   block[3][1]=-2;
+   block[3][2]=-2;
+   block[3][3]=-2;
+  }
+  if(choosePiece == 5)
+  {
+   block[2][1]=1;
+   block[2][2]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[1][0]=-1;
+   block[1][3]=-1;
+   block[4][0]=-1;
+   block[4][3]=-1;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[2][0]=-2;
+   block[3][0]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   block[2][3]=-2;
+   block[3][3]=-2;
+  }
+  if(choosePiece == 6)
+  {
+   block[2][2]=1;
+   block[3][2]=1;
+   block[3][1]=1;
+   block[3][3]=1;
+   block[1][1]=-1;
+   block[1][3]=-1;
+   block[2][0]=-1;
+   block[4][0]=-1;
+   block[4][4]=-1;
+   block[2][4]=-1;
+   block[2][1]=-2;
+   block[1][2]=-2;
+   block[2][3]=-2;
+   block[3][0]=-2;
+   block[3][4]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   block[4][3]=-2;
+  }
+  if(choosePiece == 7)
+  {
+   block[2][0]=1;
+   block[2][1]=1;
+   block[2][2]=1;
+   block[2][3]=1; 
+   block[1][4]=-1;
+   block[3][4]=-1;
+   block[1][0]=-2;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[1][3]=-2;
+   block[3][0]=-2;
+   block[3][1]=-2;
+   block[3][2]=-2;
+   block[3][3]=-2;
+  }
+  
+  if(choosePiece == 8)
+  {
+   block[3][0]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[2][2]=1;
+   block[1][1]=-1;
+   block[1][3]=-1;
+   block[4][3]=-1;
+   block[2][0]=-2;
+   block[2][1]=-2;
+   block[1][2]=-2;
+   block[2][3]=-2;
+   block[4][0]=-2;
+   block[4][2]=-2;
+   block[4][1]=-2;
+   block[3][3]=-2;
+  }
+  
+  if(choosePiece == 9)
+  {
+   block[3][1]=1;
+   block[3][2]=1;
+   block[2][2]=1;
+   block[2][3]=1;
+   block[1][1]=-1;
+   block[1][4]=-1;
+   block[2][0]=-1;
+   block[3][4]=-1;
+   block[4][0]=-1;
+   block[4][3]=-1;
+   block[2][1]=-2;
+   block[3][0]=-2;
+   block[1][2]=-2;
+   block[1][3]=-2;
+   block[2][4]=-2;
+   block[3][3]=-2;
+   block[3][4]=-1;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   
+  }
+  
+  if(choosePiece == 10)
+  {
+   block[3][0]=1;
+   block[2][0]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[3][3]=1;
+   block[1][1]=-1;
+   block[2][4]=-1;
+   block[4][4]=-1;
+   block[1][0]=-2;
+   block[2][1]=-2;
+   block[2][2]=-2;
+   block[2][3]=-2;
+   block[3][4]=-2;
+   block[4][0]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   block[4][3]=-2;
+  }
+  
+  if(choosePiece == 11)
+  {
+   block[0][2]=1;
+   block[1][2]=1;
+   block[2][1]=1;
+   block[2][3]=1;
+   block[2][2]=1;
+   block[1][0]=-1;
+   block[3][0]=-1;
+   block[1][4]=-1;
+   block[3][4]=-1;
+   block[0][1]=-2;
+   block[0][3]=-2;
+   block[1][1]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][4]=-2;
+   block[3][1]=-2;
+   block[3][2]=-2;
+   block[3][3]=-2;
+  }
+  
+  if(choosePiece == 12)
+  {
+   block[1][1]=1;
+   block[2][1]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[3][3]=1;
+   block[0][0]=-1;
+   block[0][2]=-1;
+   block[4][0]=-1;
+   block[4][4]=-1;
+   block[2][4]=-1;
+   block[0][2]=-1;
+   block[1][0]=-2;
+   block[1][2]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][2]=-2;
+   block[2][3]=-2;
+   block[3][0]=-2;
+   block[3][4]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   block[4][3]=-2;
+  }
+  
+  if(choosePiece == 13)
+  {
+   block[3][0]=1;
+   block[3][1]=1;
+   block[2][1]=1;
+   block[2][2]=1;
+   block[2][3]=1;
+   block[1][0]=-1;
+   block[1][4]=-1;
+   block[3][4]=-1;
+   block[4][2]=-1;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][4]=-2;
+   block[3][2]=-2;
+   block[3][3]=-2;
+   block[4][0]=-2;
+   block[4][1]=-2;
+  }
+  
+  if(choosePiece == 14)
+  {
+   block[3][1]=1;
+   block[2][1]=1;
+   block[2][2]=1;
+   block[2][3]=1;
+   block[1][3]=1;
+   block[0][2]=-1;
+   block[0][4]=-1;
+   block[1][0]=-1;
+   block[3][4]=-1;
+   block[4][0]=-1;
+   block[4][2]=-1;
+   block[1][1]=-2;
+   block[1][2]=-2;
+   block[0][3]=-2;
+   block[1][4]=-2;
+   block[2][0]=-2;
+   block[2][4]=-2;
+   block[3][0]=-2;
+   block[3][2]=-2;
+   block[3][3]=-2;
+   block[4][1]=-2;
+  }
+  
+  if(choosePiece == 15)
+  {
+   block[2][2]=1;
+   block[0][2]=1;
+   block[1][2]=1;
+   block[3][2]=1;
+   block[4][2]=1;
+   block[0][1]=-2;
+   block[0][3]=-2;
+   block[1][1]=-2;
+   block[1][3]=-2;
+   block[2][1]=-2;
+   block[2][3]=-2;
+   block[3][1]=-2;
+   block[3][3]=-2;
+   block[4][1]=-2;
+   block[4][3]=-2;
+  }
+  
+  if(choosePiece == 16)
+  {
+   block[1][1]=1;
+   block[2][1]=1;
+   block[3][1]=1;
+   block[2][2]=1;
+   block[3][2]=1;
+   block[0][0]=-1;
+   block[0][2]=-1;
+   block[1][3]=-1;
+   block[4][0]=-1;
+   block[4][3]=-1;
+   block[0][1]=-2;
+   block[2][0]=-2;
+   block[3][0]=-2;
+   block[1][0]=-2;
+   block[1][2]=-2;
+   block[2][3]=-2;
+   block[3][3]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+  }
+  
+  if(choosePiece == 17)
+  {
+   block[3][1]=1;
+   block[2][1]=1;
+   block[2][2]=1;
+   block[1][2]=1;
+   block[1][3]=1;
+   block[0][1]=-1;
+   block[1][0]=-1;
+   block[0][4]=-1;
+   block[2][4]=-1;
+   block[3][3]=-1;
+   block[4][0]=-1;
+   block[4][2]=-1;
+   block[1][1]=-2;
+   block[0][2]=-2;
+   block[0][3]=-2;
+   block[1][4]=-2;
+   block[2][0]=-2;
+   block[2][3]=-2;
+   block[3][0]=-2;
+   block[3][2]=-2;
+   block[4][1]=-2;
+  }
+  
+  if(choosePiece == 18)
+  {
+   block[1][1]=1;
+   block[1][2]=1;
+   block[2][1]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[0][0]=-1;
+   block[0][3]=-1;
+   block[2][3]=-1;
+   block[4][0]=-1;
+   block[4][3]=-1;
+   block[0][1]=-2;
+   block[0][2]=-2;
+   block[1][0]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][2]=-2;
+   block[2][3]=-2;
+   block[3][0]=-2;
+   block[3][3]=-2;
+   block[4][1]=-2;
+   block[4][2]=-2;
+   
+  }
+  
+  if(choosePiece == 19)
+  {
+   block[2][1]=1;
+   block[2][2]=1;
+   block[3][2]=1;
+   block[1][2]=1;
+   block[1][3]=1;
+   block[0][1]=-1;
+   block[1][0]=-1;
+   block[3][0]=-1;
+   block[4][1]=-1;
+   block[4][3]=-1;
+   block[0][4]=-1;
+   block[2][4]=-1;
+   block[1][1]=-2;
+   block[0][2]=-2;
+   block[0][3]=-2;
+   block[1][4]=-2;
+   block[2][0]=-2;
+   block[2][3]=-2;
+   block[3][1]=-2;
+   block[3][3]=-2;
+   block[3][4]=-2;
+   block[4][0]=-2;
+   block[4][2]=-2;
+   block[4][4]=-2;
+   
+  }
+  
+  if(choosePiece == 20)
+  {
+   block[1][2]=1;
+   block[2][2]=1;
+   block[2][1]=1;
+   block[2][3]=1;
+   block[3][2]=1;
+   block[0][1]=-1;
+   block[0][3]=-1;
+   block[1][0]=-1;
+   block[1][4]=-1;
+   block[3][0]=-1;
+   block[3][4]=-1;
+   block[4][1]=-1;
+   block[4][3]=-1;
+   block[0][2]=-2;
+   block[1][1]=-2;
+   block[1][3]=-2;
+   block[2][0]=-2;
+   block[2][4]=-2;
+   block[3][1]=-2;
+   block[3][3]=-2;
+   block[4][0]=-2;
+   block[4][2]=-2;
+   block[4][4]=-2;
+  }
+  
+  if(choosePiece == 21)
+  {
+   block[2][1]=1;
+   block[3][0]=1;
+   block[3][1]=1;
+   block[3][2]=1;
+   block[3][3]=1;
+   block[1][0]=-1;
+   block[1][2]=-1;
+   block[2][4]=-1;
+   block[4][4]=-1;
+   block[1][1]=-2;
+   block[2][0]=-2;
+   block[2][2]=-2;
+   block[2][3]=-2;
+   block[3][4]=-2;
+   block[4][1]=-2;
+   block[4][0]=-2;
+   block[4][2]=-2;
+   block[4][3]=-2;
+  }
+  
+  return block;
+
+ }
  
  public void paintBlocksButtons(Integer[][] blockValues, Color color, JPanel panel) {
   JButton[][] blocksPainted = new JButton[5][5]; 

@@ -18,6 +18,7 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.rmi.server.ServerCloneException;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
@@ -31,19 +32,27 @@ public class Gui {
 	
 	public Block blocksTools = new Block(); 
 	public Block blockData = new Block(); 
+	
+	
 	public Integer[][] block1= new Integer[5][5]; 
 	public Integer[][] block2= new Integer[5][5]; 
 	public Integer[][] block3= new Integer[5][5]; 
 	public Integer[][] block4= new Integer[5][5]; 
-	public Integer[][] block5 = new Integer[5][5];
+
 	public Integer counter1 =1;
 	public Integer counter2 =1; 
 	public Integer counter3 =1; 
 	public Integer counter4 =1;
+	
 	public int PLAYER_ONE = 1;
 	public int PLAYER_TWO = 2; 
 	public int PLAYER_THREE=3; 
 	public int PLAYER_FOUR=4; 
+	
+	public boolean blockUsed1[] = new boolean[22]; 
+	public boolean blockUsed2[] = new boolean[21]; 
+	public boolean blockUsed3[] = new boolean[21]; 
+	public boolean blockUsed4[] = new boolean[21]; 
 	
     public Integer[][] blockTestIntegers = new Integer[30][30]; 
     public Integer[][] blockTestIntegers2 = new Integer[30][30]; 
@@ -53,7 +62,7 @@ public class Gui {
 	public JButton[][] boardGridValue2 = new JButton[30][30];
 	public BlockData getBlockData = new BlockData(); 
 	public Board theBoard = new Board(); 
-	private int counter = 1;
+	private int counter = 0;
 		public Gui()
 		
 		{
@@ -168,7 +177,6 @@ public class Gui {
 		
 		
 		
-		
 	
 		//BLOCK HOLDER FOR PLAYER 1
 		
@@ -206,9 +214,15 @@ public class Gui {
 		    menuBarJPanel.add(playerThreeTestButton); 
 		    menuBarJPanel.add(playerFourTestButton); 
 		   
+		    for(int i=1; i<22; i++)
+		    {
+		    	blockUsed1[i] = false; 
+		    }
 		     playerOneTestButton.addActionListener(new ActionListener() {  
 				    @Override
-				    public void actionPerformed(ActionEvent e ) {    
+				    public void actionPerformed(ActionEvent e ) {  
+				    
+				 
 				    	 block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
 				    	
 				    	 //so it only focus on desired piece
@@ -233,11 +247,18 @@ public class Gui {
 											public Color oldColor;
 											
 								 	   public void mouseClicked(MouseEvent evt) {
-								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block1, Color.blue, row, col, PLAYER_ONE); 
-								 
+								 		   if(blockUsed1[counter1]==false) {
+								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block1, 
+								 			   Color.blue, row, col, PLAYER_ONE,  blockUsed1, counter1, nextP1);
+								 	  // nextP1.doClick(); 
+										 
+								 	   System.out.println("BLOCK PLAYER 1 :" + counter1);
+								 	   
+								 	  }
 									   
-									   
+								 		  
 								 	   }
+								 	   
 								 	  public void mouseEntered(MouseEvent evt) { 		 
 								 		 theBoard.gridMouseEntered(evt, boardGridValue, blockTestIntegers, block1, Color.blue, row, col);
 									    	}
@@ -253,20 +274,35 @@ public class Gui {
 					@Override
 					public void actionPerformed(ActionEvent e ) {
 					if(e.getSource()==nextP1) {
-					  block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
-
-						counter1++; 
-						if(counter1>21) {
-							counter1=1;
-							
+						counter1++;
+						if(counter1>21 ) {
+							counter1=0;
 						}
-						//when grid is clicked 
+					if(blockUsed1[counter1]==false) {
+						
+							block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+							
+						  }
+						
+					else if(blockUsed1[counter1]==true) {
+						counter1++;
+						
+						}
 					
-								
-								}
-
-								}
+					
+					
+						
 						 
+							
+							
+						
+						 System.out.println(counter1); 
+						
+						 
+						
+						
+						//when grid is clicked 
+					}}
 
 				});
 				  rotateLP1.addActionListener(new ActionListener() { 	
@@ -335,7 +371,7 @@ public class Gui {
 										public Color oldColor;
 										
 							 	   public void mouseClicked(MouseEvent evt) {
-							 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block2, Color.RED, row, col, PLAYER_TWO);
+							 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block2, Color.RED, row, col, PLAYER_TWO,  blockUsed2, counter2, nextP2);
 								 	  
 							 	  
 							 	  
@@ -355,14 +391,20 @@ public class Gui {
 					@Override
 					public void actionPerformed(ActionEvent e ) {
 					if(e.getSource()==nextP2) {
-					  block2 = blocksTools.getPiece(block2, counter2, playerTwoBlockHolder, Color.RED);
-
-						counter2++; 
-						if(counter2>21) {
+						if(counter2>20) {
 							counter2=1;
+							  
 							
-
 						}
+						else {
+							{
+								counter2++;
+								 
+							}
+						}
+						 System.out.println(counter2); 
+						 block2 = blocksTools.getPiece(block2, counter2, playerTwoBlockHolder, Color.RED);
+						
 						//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
 						}
 					  } 
@@ -425,7 +467,8 @@ public class Gui {
 											public Color oldColor;
 											
 								 	   public void mouseClicked(MouseEvent evt) {
-								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block3, Color.YELLOW, row, col, PLAYER_THREE);
+								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block3, Color.YELLOW, row, col, PLAYER_THREE,  blockUsed3, counter3, 
+								 			  nextP3);
 								 
 								 	 
 									    }
@@ -559,7 +602,8 @@ public class Gui {
 											public Color oldColor;
 											
 								 	   public void mouseClicked(MouseEvent evt) {
-								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block4, Color.GREEN, row, col, PLAYER_FOUR);
+								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block4, Color.GREEN, row, col, PLAYER_FOUR,  
+								 			   blockUsed4, counter4, nextP4);
 								 	   
 									 
 									   
