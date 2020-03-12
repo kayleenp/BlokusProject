@@ -67,10 +67,10 @@ public class Gui {
 	public int remainingPieceCounterP3 = 0; 
 	public int remainingPieceCounterP4 = 0; 
 	
-	public boolean blockUsed1[] = new boolean[22]; 
-	public boolean blockUsed2[] = new boolean[21]; 
-	public boolean blockUsed3[] = new boolean[21]; 
-	public boolean blockUsed4[] = new boolean[21]; 
+	public boolean blockUsed1[] = new boolean[23]; 
+	public boolean blockUsed2[] = new boolean[23]; 
+	public boolean blockUsed3[] = new boolean[23]; 
+	public boolean blockUsed4[] = new boolean[23]; 
 	
     public Integer[][] blockTestIntegers = new Integer[30][30]; 
     public Integer[][] blockTestIntegers2 = new Integer[30][30]; 
@@ -237,7 +237,8 @@ public class Gui {
 		remainingPiece4.setSize(800,550);
 		
 		GridLayout rpGrid = new GridLayout(25,30);
-
+		
+		
 		
 		remainingPieceGrid2.setBackground(Color.white);
 		remainingPieceGrid3.setBackground(Color.white);
@@ -251,7 +252,13 @@ public class Gui {
 		remainingPieceGrid1.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
 		RPTest = theBoard.remainingPieceGrid(0, 0, remainingPieceGrid1);
 		
-
+		JFrame gameOverFrame = new JFrame();
+		gameOverFrame.setVisible(false);
+		gameOverFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		gameOverFrame.setTitle("GameOver");
+		gameOverFrame.setSize(800,550);
+		gameOverFrame.setLocationRelativeTo(null);
+		
 			
 		
 		RPTest = theBoard.remainingPiece(0,0,RPTest, getBlockData.Piece(1), Color.blue, true );
@@ -477,7 +484,11 @@ public class Gui {
 								 			   Color.blue, row, col, PLAYER_ONE,  blockUsed1, counter1, nextP1, 
 								 			   remainingPieceCounterP1, playerTwoTestButton, RPTest,   p1Score, 
 								 			   player1Score);
-								 	  scoring(boardGridValue, p1Score, player1Score);
+								 		System.out.print("CLICK : " + counter1);
+								 	  scoring(boardGridValue, p1Score, player1Score, Color.blue);
+								 	  if(player1Score >89) { 
+								 		  System.out.print("YOU WIN PLAYER 1");
+								 	  }
 								 	     
 								 	      
 								 	  }
@@ -501,17 +512,20 @@ public class Gui {
 					@Override
 					public void actionPerformed(ActionEvent e ) {
 					if(e.getSource()==nextP1) {
-						counter1++;
+						
 						if(counter1>21 ) {
 							counter1=0;
 						}
 						
-					
-							
+						else { 
+							counter1=counter1+1;
 						}
-					if(blockUsed1[counter1]==false) {
 							
+						
+					if(blockUsed1[counter1]==false) {
+						
 							block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+						
 							
 						}
 				
@@ -529,23 +543,23 @@ public class Gui {
 						
 						//when grid is clicked 
 					}
-
+					}
 				});
-		     
 		     prevP1.addActionListener(new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e ) {
 					if(e.getSource()==prevP1) {
 						counter1--;
+						System.out.print(counter1);
 						if(counter1<1 ) {
 							counter1=22;
 						}
 						
 					
-							
-						}
+					
 					if(blockUsed1[counter1]==false) {
-							
+						
+						
 							block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
 							
 						}
@@ -560,15 +574,15 @@ public class Gui {
 					
 						
 						 
-						
+					}	
 						
 						//when grid is clicked 
 					}
 
 				});
+		   
 		     
-		     
-		 
+		   
 		     
 		     
 				  rotateLP1.addActionListener(new ActionListener() { 	
@@ -627,7 +641,6 @@ public class Gui {
 		    @Override
 		    public void actionPerformed(ActionEvent e ) {
 		    	remainingPiece2.setVisible(true);
-		    		counter2++; 
 			    	 block2 = blocksTools.getPiece(block2, counter2, playerTwoBlockHolder, Color.red);
 			    	 for(int i=0; i<5;i++) {
 			    		 for(int j=0 ;j<5;j++)
@@ -658,6 +671,8 @@ public class Gui {
 							 		   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block2, Color.RED, row, col, 
 							 			   PLAYER_TWO,  blockUsed2, counter2, nextP2, remainingPieceCounterP2, playerThreeTestButton, RPTest2, 
 							 			  p2Score, player2Score);
+							 		   
+							 		  scoring(boardGridValue, p2Score, player2Score, Color.red);
 							 		   }
 							 	  
 							 	  
@@ -821,6 +836,7 @@ public class Gui {
 									 		   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block3, Color.YELLOW, row, col, 
 									 			   PLAYER_THREE,  blockUsed3, counter3, nextP3, remainingPieceCounterP3, playerFourTestButton, RPTest3, 
 									 			   p3Score, player3Score);
+									 		  scoring(boardGridValue, p3Score, player3Score, Color.yellow);
 									 		   }
 								 
 								 	 
@@ -844,8 +860,6 @@ public class Gui {
 								if(counter3>21 ) {
 									counter3=0;
 								}
-								
-							
 									
 								}
 							if(blockUsed3[counter3]==false) {
@@ -982,6 +996,9 @@ public class Gui {
 								 	   theBoard.gridClicked(evt, boardGridValue, blockTestIntegers, block4, Color.GREEN, row, col, PLAYER_FOUR,  
 								 			   blockUsed4, counter4, nextP4, remainingPieceCounterP4, playerOneTestButton, RPTest4, 
 								 			  p4Score, player4Score);
+								 	  scoring(boardGridValue, p4Score, player4Score, Color.green);
+								 	   
+								 	   
 								 		  }
 									 
 									   
@@ -1124,11 +1141,17 @@ public class Gui {
 						
 			}
 		}
+		
+		if(endGame==true) { 
+			gameOverFrame.setVisible(true);
+		}
 	    passP2.addActionListener(new ActionListener() { 
 			@Override
 			public void actionPerformed(ActionEvent e ) {
 	
-				playerTwoTestButton.doClick(1);}
+				playerTwoTestButton.doClick(1);
+			counter3=0;	
+			}
 
 		});
 	    
@@ -1237,7 +1260,7 @@ public class Gui {
 		
 		}
 		
-		 public int scoring(JButton[][] grid, JLabel p1Score, int score) {
+		 public int scoring(JButton[][] grid, JLabel p1Score, int score, Color color) {
 				
 				
 			
@@ -1245,7 +1268,7 @@ public class Gui {
 				  for(int j=0; j<30; j++) {
 					  if(i<=26 &&  j<=26 && i>=3 && j>=3 ) {
 						  
-						  if(grid[i][j].getBackground()==Color.BLUE) {
+						  if(grid[i][j].getBackground()==color) {
 							 score++; 
 							 
 							 
@@ -1258,6 +1281,8 @@ public class Gui {
 			    p1Score.setText("SCORE  :" + score);
 			    return score;
 		  }
+		 
+		 
 		
 
 		

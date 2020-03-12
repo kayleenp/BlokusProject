@@ -12,9 +12,5 @@ public class Player {
 		
 	}
 	
-	public void nextPlayer(JPanel currentPlayer, JPanel nextPlayer) { 
-		currentPlayer.setEnabled(false);
-		nextPlayer.setEnabled(true);;
-	}
 
 }
