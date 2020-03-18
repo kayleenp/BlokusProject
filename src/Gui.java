@@ -416,10 +416,7 @@ public class Gui {
 		    JButton playerThreeTestButton= new JButton ("Player 3");
 		    JButton playerFourTestButton = new JButton ("Player 4");
 		    
-		    playerTwoTestButton.setVisible(false);
-		    playerThreeTestButton.setVisible(false);
-		    playerFourTestButton.setVisible(false);
-
+		    
 		    
 		   // playerOnePanel.add(nextTurnP2);
 		    playerOnePanel.add(passP2);
@@ -484,10 +481,12 @@ public class Gui {
 								 			   Color.blue, row, col, PLAYER_ONE,  blockUsed1, counter1, nextP1, 
 								 			   remainingPieceCounterP1, playerTwoTestButton, RPTest,   p1Score, 
 								 			   player1Score);
+								 	   
 								 		System.out.print("CLICK : " + counter1);
 								 	  scoring(boardGridValue, p1Score, player1Score, Color.blue);
 								 	  if(player1Score >89) { 
 								 		  System.out.print("YOU WIN PLAYER 1");
+								 		  gameOverFrame.setVisible(true);
 								 	  }
 								 	     
 								 	      
@@ -511,31 +510,37 @@ public class Gui {
 		     nextP1.addActionListener(new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e ) {
-					if(e.getSource()==nextP1) {
 						
+						
+					if(e.getSource()==nextP1) {
+						counter1++;
 						if(counter1>21 ) {
 							counter1=0;
 						}
-						
-						else { 
-							counter1=counter1+1;
-						}
+						if(blockUsed1[counter1]==false) {
 							
-						
-					if(blockUsed1[counter1]==false) {
-						
 							block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
 						
 							
 						}
+						if(blockUsed1[counter1]==true) {
+							while(blockUsed1[counter1]==true) {
+								counter1++;
+							}
+							
+							
+							
+							}
+						
+						
+							//block1 = blocksTools.getPiece(block1, counter1, playerOneBlockHolder, Color.blue);
+							
+						
+						
+				
 				
 						
 						
-					else if(blockUsed1[counter1]==true) {
-						
-						nextP1.doClick(1);
-						
-						}
 					
 						
 						 
@@ -754,54 +759,54 @@ public class Gui {
 					}
 
 				});
-				  rotateLP2.addActionListener(new ActionListener() { 	
-						
-						@Override
-						public void actionPerformed(ActionEvent e ) {		
-							if(e.getSource()==rotateLP2) {
-							block2 = blocksTools.rotate(block2); 
-								playerTwoBlockHolder.removeAll(); 
-								playerTwoBlockHolder.revalidate(); 
-								playerTwoBlockHolder.repaint(); 
-								getBlockData.paintBlocksButtons(
-										block2,Color.red,
-										playerTwoBlockHolder);
-							//block2 = blocksTools.getRotatedPiece(block2,  playerTwoBlockHolder, Color.red);
-							//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
-
-							
-						}}	
-					});
-					mirrorP2.addActionListener(new ActionListener() { 	
-						
-						@Override
-						public void actionPerformed(ActionEvent e ) {
-							
-							if(e.getSource()==mirrorP2) {
-								block2 = blocksTools.getFlippedPiece(block2,  playerTwoBlockHolder, Color.red);	
-								
-
-							}
-						}	
-					});
-					flipVerticalP2.addActionListener(new ActionListener() { 	
-						
-						@Override
-						public void actionPerformed(ActionEvent e ) {
-							
-							if(e.getSource()==flipVerticalP2) {
-								block2 = blocksTools.getFVPiece(block2,  playerTwoBlockHolder, Color.red);	
-								
-
-							}
-						}	
-					});
+				
 		       
 		    
 		    }
 		    
 		   });
-		    
+		    rotateLP2.addActionListener(new ActionListener() { 	
+				
+				@Override
+				public void actionPerformed(ActionEvent e ) {		
+					if(e.getSource()==rotateLP2) {
+					block2 = blocksTools.rotate(block2); 
+						playerTwoBlockHolder.removeAll(); 
+						playerTwoBlockHolder.revalidate(); 
+						playerTwoBlockHolder.repaint(); 
+						getBlockData.paintBlocksButtons(
+								block2,Color.red,
+								playerTwoBlockHolder);
+					//block2 = blocksTools.getRotatedPiece(block2,  playerTwoBlockHolder, Color.red);
+					//theBoard.gridClicked(boardPanel, boardGridValue, blockTestIntegers, block2, Color.RED);	
+
+					
+				}}	
+			});
+			mirrorP2.addActionListener(new ActionListener() { 	
+				
+				@Override
+				public void actionPerformed(ActionEvent e ) {
+					
+					if(e.getSource()==mirrorP2) {
+						block2 = blocksTools.getFlippedPiece(block2,  playerTwoBlockHolder, Color.red);	
+						
+
+					}
+				}	
+			});
+			flipVerticalP2.addActionListener(new ActionListener() { 	
+				
+				@Override
+				public void actionPerformed(ActionEvent e ) {
+					
+					if(e.getSource()==flipVerticalP2) {
+						block2 = blocksTools.getFVPiece(block2,  playerTwoBlockHolder, Color.red);	
+						
+
+					}
+				}	
+			});
 		    playerThreeTestButton.addActionListener(new ActionListener() {  
 			    @Override
 			    public void actionPerformed(ActionEvent e ) {
@@ -1126,25 +1131,7 @@ public class Gui {
 		   
 		  boolean endGame = false; 
 		 
-		for(int i=0; i<25; i++) { 
-			for(int j=0; j<30; j++) { 
-				
-				if(RPTest[i][j].getBackground()==Color.WHITE){
-					endGame = false; 
-				}
-				else 
-				{ 
-					endGame = true; 
-					i=25; 
-					j=30; 
-				}
-						
-			}
-		}
-		
-		if(endGame==true) { 
-			gameOverFrame.setVisible(true);
-		}
+	
 	    passP2.addActionListener(new ActionListener() { 
 			@Override
 			public void actionPerformed(ActionEvent e ) {

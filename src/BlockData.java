@@ -148,7 +148,7 @@ public class BlockData {
      block[2][4]=-1;
      block[3][0]=-1;
      block[4][3]=-1;
-     block[2][0]=-1;
+ 
      block[2][1]=-1;
      block[4][2]=-1;
      block[4][1]=-1;

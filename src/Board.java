@@ -208,7 +208,7 @@ public class Board {
 										
 										remainingPieceButton =  remainingBlockData.remainingBlocks(remainingPieceButton, playerValue, currentPiece, false);
 										checkPiece[currentPiece]=true;
-										nextPlayerButton.doClick(1/2);
+										nextPlayerButton.doClick(1);
 										
 										}
 									// untuk ujungnya yg gaada yg gaboleh
